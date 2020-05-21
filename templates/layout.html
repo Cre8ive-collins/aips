@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="icon" href="{{ url_for('static', filename='images/img1.png') }}">
+    </head>
+    <body>
+        
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                  <a class="navbar-brand" href="#">
+                    <img src="{{ url_for('static', filename='images/img1.png') }}" width="60rem" alt="">
+                  </a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                      <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                      </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                  </div>
+                </nav>
+            </div>
+            <hr class="bg-success"> 
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-9 " id="carousel-container">
+                    {{ block_code }}
+                    {{ endblock }}
+                    </div>
+                    </div> 
+                    <div class="col-sm-3">
+                        <div class="list-group">
+                          <a href="#" class="list-group-item list-group-item-action bg-success">
+                            Cras justo odio
+                          </a>
+                          <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+                          <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+                          <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+                          <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Vestibulum at eros</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-success">
+            <footer class="bg-success">
+                <div class="container " id="text-white">
+                    <div class="row">
+                        <div class="col-sm-4 ">
+                            <li><a href="" class="mb-1">Home</a></li>
+                            <li><a href="" class="mb-1">About</a></li>
+                            <li><a href="" class="mb-1">Contact</a></li>
+                            <li><a href="" class="mb-1">Admin</a></li>
+                        </div>
+                        <div class="col-sm-4">
+                            <li><a href="">Facebook &nbsp; <span class="fa fa-facebook"></span></a></li>
+                            <li><a href="">Twitter &nbsp; <span class="fa fa-twitter"></span></a></li>
+                            <li><a href="">Github &nbsp; <span class="fa fa-github"></span></a></li>
+                            <li><a href="">Linkedin &nbsp; <span class="fa fa-linkedin"></span></a></li>
+                        </div>
+                        <div class="col-sm-4">
+                            <li><a href="">Admin</a></li>
+                            <li><a href="">Career</a></li>
+                            <li><a href=""></a></li>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                    <div class="row d-flex justify-content-center" id="text-white">
+                        <p>Made with <span class="fa fa-heart"></span> & <span class="fa fa-coffee" aria-hidden="true"></span> by <a href="https://twitter.com/illegalfineboy">Cre8ive Collins</a> &copy; 2020 all right reserverd</p>
+                    </div>
+                </div>
+            </footer>
+        <sript src="{{ url_for('static', filename='js/main.js') }}"></sript>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>
