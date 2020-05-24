@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-fluid">
+	<form method="POST" action="/register" name="reg_form">
+	    <div class="form-group">
+	    	<input type="text" class="form-control" placeholder="Full Name" name="name" id="name" onchange="validateRegForm(this.value)" required="true">
+	    	<span id="response" class="text-muted"></span>
+
+	    </div>
+	    <div class="form-group"><input type="email" class="form-control" placeholder="Email" name="email" id="email" required="true"></div>
+	    <div class="form-group"><input type="text" class="form-control" placeholder="User Name" name="username" id="username" required="true"></div>
+	    <div class="form-group">
+	    	<input type="password" class="form-control" placeholder="Password" name="password" id="password" required="true">
+	    </div>
+	    <div class="form-check">
+		    <input type="checkbox" class="form-check-input" name="remember" id="exampleCheck1">
+		    <label class="form-check-label" for="exampleCheck1">Remember me</label>
+		 </div>
+	    <div class="form-group">
+	    <input type="submit" class="d-none" id="submit">
+		</div>
+	</form>
+	<span>Already have an account </span><a href="" class="text-info">Sign in</a>
+</div>
+
+{% endblock %}

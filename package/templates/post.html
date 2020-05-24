@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-fluid">
+	<div class="card">
+	  <div class="card-header bg-success" id="text-white">
+	    <h4>{{ post.tag }}</h4>
+	  </div>
+	  <div class="card-body">
+	    <h6 class="card-title">{{ post.description }}</h6>
+	    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+	    <a href="#" class="btn btn-primary">Go somewhere</a>
+	  </div>
+	</div>
+	<!-- <h1></h1>
+	<h2></h2>
+	<h3>{{ post.date }}</h3> -->
+</div>
+{% endblock %}

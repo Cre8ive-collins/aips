@@ -28,3 +28,7 @@ footer li{
 footer{
 	padding-top: 1rem;
 }
+
+.jumbotron{
+	background-color: whitesmoke !important;
+}
