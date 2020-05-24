@@ -22,9 +22,14 @@
 	<div class="container">
 <div class="row"> 
 <div class="col-xs-3 p-auto m-auto">
-<button class="btn btn-lg btn-success" onclick="">Create</button>
+<button class="btn btn-lg btn-success" onclick="" id="cretebtn">Create</button>
+<script type="text/javascript">
+	var btn = document.getElementById("createbtn")
+	btn.firstElementChild.setAttribute("class", "col-xs-3 p-auto m-auto");
+		
+</script>
 </div>
-<div class="col-xs-3 p-auto m-auto">
+<div class="d-none">
 <button class="btn btn-lg btn-info ">Read</button>
 </div>
 <div class="col-xs-3 p-auto m-auto">
