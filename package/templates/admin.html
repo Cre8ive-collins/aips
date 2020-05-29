@@ -7,62 +7,93 @@
 	<div class="row text-center">
 		<div class="col-xs-4 text-center">
 			<div class="bg-success text-white pl-1 pr-1 rounded mb-0">No of Student(s)</div>
-			<div class="bg-light text-success pl-1 pr-1 rounded mt-0"><h3>2</h3></div>
+			<div class="bg-light text-success pl-1 pr-1 rounded mt-0"><h3>{{ students }}</h3></div>
 		</div>
 		<div class="col-xs-4 text-center ml-2">
 			<div class="bg-success text-white pl-1 pr-1 rounded mb-0">No of Track(s)</div>
-			<div class="bg-light text-success pl-1 pr-1 rounded mt-0"><h3>2</h3></div>
+			<div class="bg-light text-success pl-1 pr-1 rounded mt-0"><h3>{{ track }}</h3></div>
 		</div>
 		<div class="col-xs-4 text-center ml-2">
 			<div class="bg-success text-white pl-1 pr-1 rounded mb-0">No of Course(s)</div>
-			<div class="bg-light text-success pl-1 pr-1 rounded mt-0"><h3>2</h3></div>
+			<div class="bg-light text-success pl-1 pr-1 rounded mt-0"><h3>{{ path }}</h3></div>
 		</div>
-
+		<div class="col-xs-4 text-center ml-2">
+			<div class="bg-success text-white pl-1 pr-1 rounded mb-0">Lesson(s)</div>
+			<div class="bg-light text-success pl-1 pr-1 rounded mt-0"><h3>{{ lesson }}</h3></div>
+		</div>
 	</div>
-	<div class="container">
-<div class="row"> 
-<div class="col-xs-3 p-auto m-auto">
-<button class="btn btn-lg btn-success" onclick="" id="cretebtn">Create</button>
-<script type="text/javascript">
-	var btn = document.getElementById("createbtn")
-	btn.firstElementChild.setAttribute("class", "col-xs-3 p-auto m-auto");
+
+<hr>
+	<div class="row">
+	<div class="container d-flex justify-content-center">
+			<div class="col-xs-4 p-0 fader ">
+				<span class="btn btn-lg btn-success">Create</span>
+				<div class="d-none" id="show">
+			    <a href="{{ url_for('create_post') }}"><button class="btn btn-success btn-lg mt-2 " id="">Lesson</button></a>
+			    <a href="{{ url_for('register') }}"><button class="btn btn-success btn-lg mt-2" id="">User</button></a>
+			   
+			    </div>
+			</div>
+
 		
-</script>
-</div>
-<div class="d-none">
-<button class="btn btn-lg btn-info ">Read</button>
-</div>
-<div class="col-xs-3 p-auto m-auto">
-<button class="btn btn-lg btn-warning ">Update</button>
-</div>
-<div class="col-xs-3 p-auto m-auto">
-<button class="btn btn-lg btn-danger ">Delete</button>
-</div>
-</div>
-</div>
-<div class="container mt-2">
-<div class="row"> 
-<div class="col-xs-3 p-auto m-auto">
-<button class="btn btn-lg btn-success ">Post</button>
-<button class="btn btn-lg btn-success ">User</button>
-</div>
-<div class="col-xs-3 p-auto m-auto">
-<button class="btn btn-lg btn-info ">Post</button>
-<button class="btn btn-lg btn-info ">User</button>
-</div>
-<div class="col-xs-3 p-auto m-auto">
-<button class="btn btn-lg btn-warning ">Post</button>
-<button class="btn btn-lg btn-warning ">User</button>
-</div>
-<div class="col-xs-3 p-auto m-auto">
-<button class="btn btn-lg btn-danger ">Post</button>
-<button class="btn btn-lg btn-danger ">User</button>
-</div>
-</div>
-</div>
+		</div>	
+	</div>
 </div>
 {% endblock %}
 
 {% block content_b %}
+{% if read_user %}
+	<hr class="bg-success"> 
+	<table class="table table-striped">
+  		<thead class="thead-dark">
+    		<tr>
+		      <th scope="col">#</th>
+		      <th scope="col">Name</th>
+		      <th scope="col">Email</th>
+		      <th scope="col">Username</th>
+    		</tr>
+  		</thead>
+  		<tbody>
+  			{% for users in range(read_user|length ) %}
+  			<tr>
+  				<th scope="row">{{ read_user[users].id }}</th>
+  				<td>{{ read_user[users].name }} </td>
+  				<td>{{ read_user[users].email }} </td>
+  				<td>{{ read_user[users].username }} </td>
+  			</tr>
+  			{% endfor %}
+  		</tbody>
+	</table>
+	{% endif %}
+	<hr class="bg-success">
+	<div class="container " >
+
+		<form action="/read_user_form" method="post" class="" id="read_user_form add_track">
+		<div class="form-group container">
+		<legend>Read User</legend>
+		<div class="col-xs-10">
+		<input type="text" name="read_user" placeholder="Enter Username or Email" class="form-control " required="true">
+		<button class="btn form-control btn-info mt-2">Check User Details</button>
+		
+		</div>
+		
+		</div>
+		
+		</form>
+	</div>
+
+	<div class="container " >
+<hr class="bg-success">
+		<form action="/add_course" method="post">
+			<legend>Add Track or Course</legend>
+		<div class="form-group container">
+		<input type="text" name="create_track" placeholder="New Track" class="form-control " required="true">
+		<input type="text" name="create_course" placeholder="New Course" class="form-control mt-2">
+		<button class="btn form-control btn-info mt-2">Submit</button>
+		
+		</div>
+		
+		</form>
+	</div>
 
 {% endblock %}

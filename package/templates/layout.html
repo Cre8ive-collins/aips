@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
         <title></title>
 
         <meta charset="utf-8">
@@ -12,6 +14,7 @@
 
     </head>
     <body>
+
         
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -59,7 +62,7 @@
                     {% block content %}{% endblock %}
                     </div>
                      
-                    <div class="col-sm-3 mt-4">
+                    <div class="col-sm-3 mt-4 aside">
                         <div class="list-group">
                           <a href="#" class="list-group-item list-group-item-action bg-success disabled"style="color: white;">
                             Web Development
@@ -93,14 +96,14 @@
                             <li><a href="">Linkedin &nbsp; <span class="fa fa-linkedin"></span></a></li>
                         </div>
                         <div class="col-sm-4 col-xs-4 d-flex justify-content-center">
-                            <li><a href="{{ url_for('admin') }}">Admin</a></li>
+                            <li><a href="">Admin</a></li>
                             <li><a href="">Career</a></li>
                             <li><a href=""></a></li>
                         </div>
                     </div>
                 </div>
                 <hr> -->
-                <div class="container d-flex justify-content-center">
+                <div class="container d-flex">
                       <div class="text-white" style="">
                             <a href="">Facebook <span class="fa fa-facebook"></span> </a>
                             <a href="" class="ml-4">Twitter <span class="fa fa-twitter "></span></a>
@@ -114,8 +117,8 @@
                     </div>
                 </div>
             </footer>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>

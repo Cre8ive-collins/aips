@@ -29,6 +29,17 @@ footer{
 	padding-top: 1rem;
 }
 
+h4#pointer{
+	color: red
+}
+
 .jumbotron{
 	background-color: whitesmoke !important;
+}
+h4#pointer:hover {color: : red;}
+
+@media only screen and (max-width: 600px) {
+  div.aside{
+  	display: none;
+  }
 }

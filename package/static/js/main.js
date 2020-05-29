@@ -1,6 +1,35 @@
 console.log("111111111111")
 
 
+$(document).ready(function(){
+	$('button#elem1').click(function(){
+		console.log('///')
+		$('form#add_track').removeClass('d-none');
+		console.log('///2')
+		$('form#add_track').show();
+		console.log('///3')
+		
+
+	})
+
+	$("button#cancel1").click(function(){
+		$('form#read_user_form').addClass('d-none');
+		$('form#read_user_form').hide();
+	})
+	$("span#user").click(function(){
+		$('form#read_user_form').removeClass('d-none');
+		$('form#read_user_form').hide();
+		$('form#read_user_form').show();
+	})
+
+   $(".fader").click(function(){
+   	$("div#show").removeClass("d-none");
+   	$("div.fader").children("div").hide();
+    $(this).children("div").show();
+  });
+});
+
+
 function validateRegForm(name){
 		valcount = 1;
 		function isNumeric(n) {
@@ -41,3 +70,4 @@ function validateRegForm(name){
 	
 };
 
+// clear()
