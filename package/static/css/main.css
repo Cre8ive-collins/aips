@@ -1,6 +1,8 @@
 body{
 	background-color: whitesmoke;
-	margin-top: 1rem
+	/*margin-top: 1rem*/
+	max-width: 100%;
+	overflow-x: hidden;
 }
 
 #text-white{
@@ -29,8 +31,8 @@ footer{
 	padding-top: 1rem;
 }
 
-h4#pointer{
-	color: red
+.opacity{
+	opacity: 0.5;
 }
 
 .jumbotron{
@@ -38,8 +40,22 @@ h4#pointer{
 }
 h4#pointer:hover {color: : red;}
 
-@media only screen and (max-width: 600px) {
-  div.aside{
-  	display: none;
-  }
+div #rgba {
+	background-color: rgba(10,5,10,0.5) !important; 
+}
+
+div #side{
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background-color: rgba(0,78,56,0.5);
+  height : 50rem;
+  color: whitesmoke;
+}
+
+#gradient{
+  height: 100px;
+  background-color: red; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to right ,green,yellow,green) !important; /* Standard syntax (must be last) */
 }

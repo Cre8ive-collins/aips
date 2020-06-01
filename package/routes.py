@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, request, redirect
 from package.forms import LoginForm
 from package import app, db, bcrypt
 from package.dbmodels import User, Admin, Tracks, Path, Post
-from flask_login import login_user      
+from flask_login import login_user, current_user, logout_user, login_required      
 from itertools import chain
 
 
@@ -10,28 +10,17 @@ from itertools import chain
 
 @app.route('/', methods=('GET','POST'))
 def home():
-    form = LoginForm()
-    if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
-        remember = form.remember.data
-        user = User.query.filter_by(username=username).first()
-        if user and bcrypt.check_password_hash(user.password, password):
-            flash(f'Login Successfull','success')
-            login_user(user, remember=remember)
-            return redirect(url_for('home'))
-        else:
-            flash(f'Username or Password incorrect','warning')
-    return render_template('login.html', form=form)
+    return render_template('index.html')
 
 @app.route('/register', methods=('POST','GET'))
-def register(update_username = "", update_email = ""):
-    if request.method == 'POST' and (update_username or update_email == ""):
+@login_required
+def register():
+    if request.method == 'POST':
         name = request.form['name']
         email = request.form['email']
         validate_email = User.query.filter_by(email=email).first()
         if validate_email:
-            flash(f'Account already exist for {email}. Sign-in instead','danger')
+            flash(f'Account already exist for {email}. Sign-in instead','warning')
             return render_template('register.html')
         username = request.form['username']
         validate_username = User.query.filter_by(username=username).first()
@@ -50,26 +39,24 @@ def register(update_username = "", update_email = ""):
 
 @app.route('/admin', methods=('POST','GET'))
 def admin():
-    
+    form = LoginForm()
     students = max(list(chain(*User.query.with_entities(User.id).all())))
     lesson = max(list(chain(*Admin.query.with_entities(Admin.id).all())))
     path = max(list(chain(*Path.query.with_entities(Path.id).all())))
     track = max(list(chain(*Tracks.query.with_entities(Tracks.id).all())))
-    form = LoginForm()
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
-        remember = form.remember.data
         admin = Admin.query.filter_by(username=username).first()
         if admin and (password == admin.password):
             flash(f'Welcome {username}, what will you like to do?','success')
-            login_user(admin, remember=remember)
-            return render_template('admin.html', user=admin)
+            login_user(admin)
+            return render_template('admin.html', form=form, track = track, path = path, students=students, lesson= lesson )
         else:
             flash(f'Username or Password incorrect','warning')
-            #change template
-    return render_template('admin.html', form=form, track = track, path = path, students=students, lesson= lesson )
+            return render_template('admin_login.html', form=form, track = track, path = path, students=students, lesson= lesson )
 
+    return render_template('admin_login.html', form=form, track = track, path = path, students=students, lesson= lesson )
 
 @app.route('/create_post', methods = ('POST','GET'))
 def create_post():
@@ -128,7 +115,7 @@ def add_course():
         if course == "":
             tracks = Tracks.query.filter_by(title = track)
             if tracks:
-                flash(f'Track already exist','danger')
+                flash(f'Track already exist','warning')
                 return redirect(url_for('admin'))
             else:
                 tra = Tracks(title = track).first()
@@ -140,7 +127,7 @@ def add_course():
         else:
             courses = Path.query.filter_by(title = course).first()
             if courses:
-                flash(f'Course already exist','danger')
+                flash(f'Course already exist','warning')
                 return redirect(url_for('admin'))
             else:
                 tracks = Tracks.query.filter_by(title = track)
@@ -160,6 +147,77 @@ def add_course():
                     flash(f'Course {course} created', 'success')
                     return redirect(url_for('admin'))
 
-@app.route('/update_lesson')
-def update_lesson():
-    pass
+
+@app.route('/html/<post_id>')
+@login_required
+def html(post_id):
+    post = Post.query.filter_by(subject = 'HTML').all()
+    current_post = Post.query.get_or_404(post_id)
+    return render_template('html.html', post = post, current_post = current_post)
+
+
+@app.route('/css/<post_id>')
+@login_required
+def css(post_id):
+    post = Post.query.filter_by(subject = 'CSS').all()
+    current_post = Post.query.get_or_404(post_id)
+    return render_template('css.html', post = post, current_post = current_post)
+
+@app.route('/javascript/<post_id>')
+@login_required
+def javascript(post_id):
+    post = Post.query.filter_by(subject = 'javascript').all()
+    current_post = Post.query.get_or_404(post_id)
+    return render_template('javascript.html', post = post, current_post = current_post)
+
+
+@app.route('/bootstrap/<post_id>')
+@login_required
+def bootstrap(post_id):
+    post = Post.query.filter_by(subject = 'bootstrap').all()
+    current_post = Post.query.get_or_404(post_id)
+    return render_template('html.html', post = post, current_post = current_post)
+
+
+@app.route('/jquery/<post_id>')
+@login_required
+def jquery(post_id):
+    post = Post.query.filter_by(subject = 'jquery').all()
+    current_post = Post.query.get_or_404(post_id)
+    return render_template('jquery.html', post = post, current_post = current_post)
+
+@app.route('/login',  methods = ('POST', 'GET'))
+def login():
+    if current_user.is_authenticated:
+        return redirect( url_for('home') )
+    form = LoginForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        user = User.query.filter_by(username=username).first()
+        if user:
+            checked_pw = bcrypt.check_password_hash(user.password, form.password.data)
+            if checked_pw:
+                flash(f'Welcome {username}, what will you like to do?','success')
+                login_user(user)
+                next_page = request.args.get('next')
+                if next_page:
+                    return redirect(next_page)
+                else:
+                    return redirect(url_for('home') )
+        else:
+            flash(f'Username or Password incorrect','danger')
+
+    return render_template('login.html', form = form)
+
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
+
+
+@app.route('/account')
+@login_required
+def account():
+    return render_template('account.html')

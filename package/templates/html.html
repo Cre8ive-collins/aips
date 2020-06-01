@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0"></script>
+<div class="bg-secondary sticky-top">
+	<i class="fa fa-navicon btn btn-dark ml-2" id="ham"></i>
+	 <a href="{{ url_for('home') }}""><i class="fa fa-home btn btn-dark ml-2"></i></a>
+</div>
+<div class="container">
+<div class="row">
+<div class="col-sm-6 d-none overflow-auto" style="" id="side">
+<ul>
+	<li><b>HTML Tutorials</b></li>
+	<hr style="border: 1px solid whitesmoke">
+ {% for i in range( post|length ) %}
+ <li><a href="{{ url_for('html', post_id = post[i].id) }}"> <span class="fa fa-code"></span> {{ post[i].title.upper() }} </a></li>
+ {% endfor %}
+</ul>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Share your progress</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <a class="twitter-share-button"
+  href="https://twitter.com/intent/tweet?text=Hello%20world">
+<i class="fa-lg fa fa-twitter text-info"></i></a>
+<a href="whatsapp://send?text=https://chillyfacts.com/run-command-prompt-cmd-commands-from-java/" data-action="share/whatsapp/share"><i class="fa fa-lg fa-whatsapp text-success"></i></a>
+<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+      </div>
+      <div class="modal-footer">
+        <a href="{{ url_for('html', post_id = current_post.id + 1) }}" class="btn btn-success ml-2">Next</a></div>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-12">
+
+
+
+
+	<div class="bg-success btn mt-2 text-white mb-2"><h4>{{ current_post.title.upper() }}</h4></div>
+	<div class="container">
+		{% if current_post.video %}
+			<iframe width="50%" height="280rem" src="{{ current_post.video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="m-auto"></iframe>
+		{% endif %}
+	</div>
+	<div class="bg-secondary mt-2 p-2 rounded"><h6>{{ current_post.description }}</h6></div>
+	<p>{{ current_post.body }}</p>
+	<div class="row">
+		<div class="col-xs-12 m-auto">
+				{% if current_post.id == 1 %}
+			<a href="{{ url_for('html', post_id = current_post.id - 1) }}" class="btn btn-success d-none">Previous</a>
+				{% else %}
+						<a href="{{ url_for('html', post_id = current_post.id - 1) }}" class="btn btn-success">Previous</a>
+				{% endif %}
+				{% if current_post.id == post|length %}
+					<a href="{{ url_for('html', post_id = current_post.id + 1) }}" class="btn btn-success ml-2 d-none">Next</a></div>
+				{% else %}
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Next
+						</button>
+				{% endif %}
+	 </div>
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}

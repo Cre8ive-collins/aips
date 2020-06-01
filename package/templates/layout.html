@@ -3,6 +3,10 @@
     <head>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+      <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+  />
         <title></title>
 
         <meta charset="utf-8">
@@ -13,12 +17,9 @@
         <link rel="icon" href="{{ url_for('static', filename='images/img1.png') }}">
 
     </head>
-    <body>
-
-        
-            <div class="container">
+    <body class="">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                  <a class="navbar-brand" href="#">
+                  <a class="navbar-brand" href="{{ url_for('home') }}">
                     <img src="{{ url_for('static', filename='images/img1.png') }}" width="60rem" alt="">
                   </a>
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,10 +29,20 @@
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                       <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                      
+                        {% if current_user.is_authenticated %}
+                        <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('account') }}">Account</a>
+                      </li>
+                         <li class="nav-item">
+                          <a class="nav-link" href="{{ url_for('logout') }}">Log-out</a>
+                        </li>
+                        {% else %}
+
+                        <a class="nav-link" href="{{ url_for('login') }}">Log-in</a>
+                        {% endif %}
                       </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
@@ -40,11 +51,10 @@
                     </form>
                   </div>
                 </nav>
-            </div>
-            <hr class="bg-success"> 
+                <!-- <hr class="bg-success">  -->
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-9 ">
+                    <div class="col-sm">
                           {% with messages = get_flashed_messages(with_categories=true) %}
                               {% if messages %}
                                 {% for category, message in messages %}
@@ -58,23 +68,11 @@
                               {% endif %}
                           {% endwith %}
                         </div>
-                    <div class="col-sm-9 d-flex justify-content-center">
-                    {% block content %}{% endblock %}
-                    </div>
-                     
-                    <div class="col-sm-3 mt-4 aside">
-                        <div class="list-group">
-                          <a href="#" class="list-group-item list-group-item-action bg-success disabled"style="color: white;">
-                            Web Development
-                          </a>
-                          <a href="#" class="list-group-item list-group-item-action">HTML (HyperText Mark-up Language)</a>
-                          <a href="#" class="list-group-item list-group-item-action">CSS (Cascading Stylesheet</a>
-                          <a href="#" class="list-group-item list-group-item-action">JaveScript</a>
-                          <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Bootstrap</a>
-                        </div>
-                    </div>
-                </div>
+                      </div>
+                    
             </div>
+
+            {% block content %}{% endblock %}
             <div class="jumbotron mt-2">
             {% block content_b %}
             {% endblock %}

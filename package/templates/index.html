@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- 
+<img src="{{ url_for('static', filename='images/img3.png ') }}" class="img-fluid" alt="Responsive image">
+ -->
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9" alt="First slide">
+      <div class="carousel-caption " id="rgba">
+    <h5 class="">Lean on learning</h5>
+    <p>Choose from our vast list of online courses with new additions published every month</p>
+  </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9" alt="Second slide">
+      <div class="carousel-caption " id="rgba">
+    <h5 class="">Technical mentor support</h5>
+    <p>Our knowledgeable mentors guide your learning and are focused on answering your questions, motivating you and keeping you on track.</p>
+  </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="https://images.unsplash.com/photo-1544717297-fa95b6ee9643?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9" alt="Third slide">
+      <div class="carousel-caption" id="rgba">
+    <h5 class="">Get ready for a career</h5>
+    <p class="">Learn in-demand skills & Launch or advance your career.Enroll in a programs today</p>
+  </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+<div class="row text-center text-light mt-2" id="gradient" style="background-image: linear-gradient(110deg, yellow, green);">
+  <div class="col">
+    <b>Expert Instruction</b>
+    <hr class="bg-white mt-0 mb-0">
+    <p class="mt-0"> Get the right instructor for you</p>
+  </div>
+  <div class="col">
+    <b>Learn the latest skills</b>
+    <hr class="bg-white mt-0 mb-0">
+    <p class="mt-0">like Web Development, & more</p>
+  </div>
+  <div class="col">
+    <b>Master Skills</b>
+    <hr class="bg-white mt-0 mb-0">
+    <p class="mt-0">Apply what you learn with hands-on projects. </p>
+  </div>
+</div>
+{% endblock %}
+
+{% block content_b %}
+<div class="container text-center">
+  <div class="row">
+    <div class="col">
+      <h2>HTML</h2>
+      <i>The language for building web pages</i><br class="mb-0">
+      <a href="{{ url_for('html', post_id = 1) }}" class="btn btn-success">Learn HTML</a>
+    </div>
+    <div class="col">
+      <h2>CSS</h2>
+      <i>The language for styling web pages</i><br class="mb-0">
+      <a href="" class="btn btn-success">Learn CSS</a>
+ 
+    </div>
+  </div>
+  <hr class="bg-success">
+  <div class="row mt-2">
+
+    <div class="col">
+      <h2>JavaScript</h2>
+      <i>The language for programming web pages</i><br class="mb-0">
+      <a href="" class="btn btn-success">Learn JavaScript</a>
+    </div>
+     <div class="col">
+      <h2>jQuery</h2>
+      <i>A JavaScript library for developing web pages</i><br class="mb-0">
+      <a href="" class="btn btn-success">Learn jQuery</a>
+    </div>
+    <div class="col">
+      <h2>BootStrap</h2>
+      <i>Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit</i><br class="mb-0">
+      <a href="" class="btn btn-success">Learn Bootstrap</a>
+    </div>
+   
+  </div>
+  <hr class="bg-success">
+</div>
+
+{% endblock %}

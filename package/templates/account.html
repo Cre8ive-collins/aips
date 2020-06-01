@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="jumbotron">
+	<div class="container">
+	<h4>{{ current_user.name }}</h4>
+	<p>{{ current_user.email }}</p>
+	<hr>
+	</div>
+</div>
+{% endblock %}
