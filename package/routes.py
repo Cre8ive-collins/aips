@@ -23,13 +23,14 @@ def register():
             flash(f'Account already exist for {email}. Sign-in instead','warning')
             return render_template('register.html')
         username = request.form['username']
+        phone = request.form['phone']
         validate_username = User.query.filter_by(username=username).first()
         if validate_username:
             flash(f'Username {username} already exist please select another username','warning')
             return render_template('register.html')
         password = request.form['password']
         hashed_pw = bcrypt.generate_password_hash(password).decode('utf-8')
-        user = User(name=name, email=email, username=username, password=hashed_pw)
+        user = User(name=name, email=email, username=username, password=hashed_pw,phone= phone)
         db.session.add(user)
         db.session.commit()
         flash(f'Account created for {name}','success')
