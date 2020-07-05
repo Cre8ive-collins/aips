@@ -1,6 +1,5 @@
 body{
 	background-color: whitesmoke;
-	/*margin-top: 1rem*/
 	max-width: 100%;
 	overflow-x: hidden;
 }
@@ -23,6 +22,7 @@ li a:hover{
 	text-decoration: none;
 }
 
+ 
 footer li{
 	margin-bottom: 0.2rem;
 }
@@ -54,8 +54,10 @@ div #side{
   color: whitesmoke;
 }
 
-#gradient{
-  height: 100px;
-  background-color: red; /* For browsers that do not support gradients */
-  background-image: linear-gradient(to right ,green,yellow,green) !important; /* Standard syntax (must be last) */
+div .main{
+	height: 50vh;
+	background-color: red;
+	background-image: url(../images/head_bg.png);
+	background-size: cover;
+ 	background-repeat: no-repeat;
 }
