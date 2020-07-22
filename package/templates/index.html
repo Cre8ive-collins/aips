@@ -51,33 +51,74 @@
   </div>
 </div> -->
 
-<div class="container main">
-<div class="jumbotron">
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <div class="d-block w-100">
-        1
+<div class="container-fluid mt-2 main">
+<div class="row"></div>
+<div class="row d-flex justify-content-center" style="margin-top: 13rem; ">
+<div style="background-color: rgba(0, 0, 0, .5); width: 80%;" class="d-flex justify-content-center text-light">
+  <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active text-center">
+        <h5 class="d-block w-100">Lean on learning.</h5>
+        <p>Choose from our vast list of online courses with new additions published every month</p>
+  
+        
       </div>
-    </div>
-    <div class="carousel-item">
-      <div class="d-block w-100">
-        2
+      <div class="carousel-item text-center">
+        <h5 class="d-block w-100">Technical mentor support</h5>
+        <p>Our knowledgeable mentors guide your learning and are focused on answering your questions, motivating you and keeping you on track.</p>
+  
       </div>
-    </div>
-    <div class="carousel-item">
-      <div class="d-block w-100">
-        3
+      <div class="carousel-item text-center">
+        <h5 class="d-block w-100">Get ready for a career</h5>
+        <p class="">Learn in-demand skills & Launch or advance your career.Enroll in a programs today</p>
+ 
       </div>
     </div>
   </div>
 </div>
 </div>
 </div>
+<div class="row text-center text-light bg-success p-2" id="grad">
+  <div class="col">
+    <span><i class="fa fa-bar-chart fa-2x" aria-hidden="true"></i>&nbsp;Learn the latest skills</span>
+  </div>
+
+  <div class="col">
+    <span><i class="fa fa-flask fa-2x" aria-hidden="true"></i> &nbsp;Expert Instructors</span>
+  </div>
+  
+  <div class="col">
+    <span><i class="fa fa-asterisk fa-2x" aria-hidden="true"></i> &nbsp;Master Skills</span>
+
+  </div>
+</div>
 {% endblock %}
 
 {% block content_b %}
-<div class="container text-center">
+
+<div class="container">
+  <div class="row">
+    {% for i in track %}
+    <div class="col-md-4 d-flex justify-content-center mt-2">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{ i.image }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{ i.title }}</h5>
+          <p class="card-text">{{ i.intro }}</p>
+          {% set id = i.id %}
+          <a href="{{ url_for('intro', id = id) }}" class="btn btn-primary">Learn {{ i.title }}</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+<script>
+  console.log({{ track }})
+</script>
+<!-- <div class="container text-center">
   <div class="row">
     <div class="col">
       <h2>HTML</h2>
@@ -112,6 +153,6 @@
    
   </div>
   <hr class="bg-success">
-</div>
+</div> -->
 
 {% endblock %}

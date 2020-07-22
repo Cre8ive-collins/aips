@@ -4,8 +4,9 @@
 $(document).ready(function(){
 
 	$('i#ham').click(function(){
-		$('div#side').removeClass('d-none')
 		$('div#side').toggle('slide')
+		$('div#side').removeClass('d-none')
+		
 	})
 
 

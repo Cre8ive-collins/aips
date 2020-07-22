@@ -32,8 +32,11 @@ class Admin(db.Model, UserMixin):
 class Tracks(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.Text )
-    rel = db.relationship('Path', backref = 'line', lazy = True)
-    rel = db.relationship('Post', backref = 'line', lazy = True)
+    intro = db.Column(db.Text)
+    image = db.Column(db.String(100))
+    message = db.Column(db.Text)
+    paths = db.relationship('Path', backref = 'line', lazy = True)
+    # rel = db.relationship('Post', backref = '', lazy = True)
 
     def __repr__(self):
         return f"Track('Track Number = {self.id}, Title = {self.title}')"

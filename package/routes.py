@@ -10,10 +10,16 @@ from itertools import chain
 
 @app.route('/', methods=('GET','POST'))
 def home():
-    return render_template('index.html')
+    track = Tracks.query.all()
+    return render_template('index.html', track = track)
+
+@app.route('/intro/<id>')
+def intro(id):
+    track = Tracks.query.get(id)
+    path = Path.query.filter_by(track = 1).all()
+    return render_template('intro.html', track = track, path = path)
 
 @app.route('/register', methods=('POST','GET'))
-@login_required
 def register():
     if request.method == 'POST':
         name = request.form['name']
@@ -41,10 +47,10 @@ def register():
 @app.route('/admin', methods=('POST','GET'))
 def admin():
     form = LoginForm()
-    students = max(list(chain(*User.query.with_entities(User.id).all())))
-    lesson = max(list(chain(*Admin.query.with_entities(Admin.id).all())))
-    path = max(list(chain(*Path.query.with_entities(Path.id).all())))
-    track = max(list(chain(*Tracks.query.with_entities(Tracks.id).all())))
+    # students = max(list(chain(*User.query.with_entities(User.id).all())))
+    # lesson = max(list(chain(*Admin.query.with_entities(Admin.id).all())))
+    # path = max(list(chain(*Path.query.with_entities(Path.id).all())))
+    # track = max(list(chain(*Tracks.query.with_entities(Tracks.id).all())))
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
@@ -52,12 +58,12 @@ def admin():
         if admin and (password == admin.password):
             flash(f'Welcome {username}, what will you like to do?','success')
             login_user(admin)
-            return render_template('admin.html', form=form, track = track, path = path, students=students, lesson= lesson )
+            return render_template('admin.html', form = form)
         else:
             flash(f'Username or Password incorrect','warning')
-            return render_template('admin_login.html', form=form, track = track, path = path, students=students, lesson= lesson )
+            return render_template('admin_login.html', form=form)
 
-    return render_template('admin_login.html', form=form, track = track, path = path, students=students, lesson= lesson )
+    return render_template('admin_login.html', form=form)
 
 @app.route('/create_post', methods = ('POST','GET'))
 def create_post():
@@ -148,9 +154,18 @@ def add_course():
                     flash(f'Course {course} created', 'success')
                     return redirect(url_for('admin'))
 
+@app.route('/studycenter/<title>/<id>')
+def studycenter(title, id = 1):
+    post = Post.query.filter_by(subject = title).all()
+    if id == "all":
+        if post == []:
+            return "ERROR"
+        return render_template ('all.html', post = post)
+    else:
+        current_post = Post.query.get_or_404(id)
+        return render_template ('studycenter.html', post = post, current_post = current_post)
 
 @app.route('/html/<post_id>')
-@login_required
 def html(post_id):
     post = Post.query.filter_by(subject = 'HTML').all()
     current_post = Post.query.get_or_404(post_id)
@@ -158,14 +173,12 @@ def html(post_id):
 
 
 @app.route('/css/<post_id>')
-@login_required
 def css(post_id):
     post = Post.query.filter_by(subject = 'CSS').all()
     current_post = Post.query.get_or_404(post_id)
     return render_template('css.html', post = post, current_post = current_post)
 
 @app.route('/javascript/<post_id>')
-@login_required
 def javascript(post_id):
     post = Post.query.filter_by(subject = 'javascript').all()
     current_post = Post.query.get_or_404(post_id)
@@ -173,7 +186,6 @@ def javascript(post_id):
 
 
 @app.route('/bootstrap/<post_id>')
-@login_required
 def bootstrap(post_id):
     post = Post.query.filter_by(subject = 'bootstrap').all()
     current_post = Post.query.get_or_404(post_id)
@@ -181,7 +193,6 @@ def bootstrap(post_id):
 
 
 @app.route('/jquery/<post_id>')
-@login_required
 def jquery(post_id):
     post = Post.query.filter_by(subject = 'jquery').all()
     current_post = Post.query.get_or_404(post_id)
@@ -219,6 +230,9 @@ def logout():
 
 
 @app.route('/account')
-@login_required
 def account():
     return render_template('account.html')
+
+@app.route("/test")
+def test():
+    return render_template('testing.html')

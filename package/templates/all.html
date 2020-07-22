@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{% for i in post %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card" style="width: 15rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.title }}</h5>
+                    <p class="card-text">{{ i.description }}</p>
+                     {% set id = i.id %}
+                 <a href="{{ url_for('intro', id = id) }}" class="btn btn-primary">
+                     Start Learning
+                </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
